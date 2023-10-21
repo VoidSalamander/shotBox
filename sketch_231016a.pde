@@ -32,12 +32,8 @@ void setup() {
 void draw() {
   background(204);
   //hit();
-  fill(154);
-  rect(0, 0, width/3, height);
-  fill(204);
-  rect(width/3, 0, width/3, height);
-  fill(154);
-  rect(width*2/3, 0, width/3, height);
+  //size(600+score, 1000);
+  draw_board();
   Box temp;
   
   for (int i = hitboxes.size()-1; i > 0; i--) {
@@ -104,25 +100,12 @@ void keyPressed(){
     if(temp.row == 1) is_hit = true;
   }else if(key == 'c' || key == 'C'){
     if(temp.row == 2) is_hit = true;
+  }else{
+    return;
   }
   if(is_hit){
     hit();
   }else{
     miss();
   }
-}
-
-void hit(){
-  score++;
-  combo++;
-  combo_size = 10;
-  hittedboxes.add(new Throw_Out_Animation(hitboxes.get(0)));
-  hitboxes.remove(0);
-  hitboxes.add(new Box(hitboxes.size(), int(random(0,3))));
-}
-
-void miss(){
-  combo = 0;
-  cooldown = true;
-  cooldown_counter = 60;
 }

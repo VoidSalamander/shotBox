@@ -8,7 +8,7 @@ class Box{
   Box(int list_pos, int input_row){
     point.x = offset + input_row * (offset * 2 + size);
     row = input_row;
-    point.y = (7 - list_pos) * (size-offset*2.5);
+    point.y = (7 - list_pos) * (size-offset);
     box_color = color(random(0, 255), random(0, 255), random(0, 255));
   }
   
