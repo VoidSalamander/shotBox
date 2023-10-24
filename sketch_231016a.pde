@@ -6,15 +6,24 @@
  * 16 oct 2023
 ****/
 
+static abstract class GameType{
+  static final int START = 0;
+  static final int STANDARD = 1;
+  static final int COOLDOWN = 2;
+  static final int PAUSE = 3;
+}
+
 boolean cooldown = false;
 float cooldown_counter = 0;
 
 int score = 0;
 int combo = 0;
-float combo_size = 0;
+int combo_size = 0;
 
 ArrayList<Box> hitboxes;
 ArrayList<Throw_Out_Animation> hittedboxes;
+
+int game_manager = 0;
 
 void setup() {
   size(600, 1000);
@@ -32,21 +41,24 @@ void setup() {
 void draw() {
   background(204);
   //hit();
-  //size(600+score, 1000);
   draw_board();
-  Box temp;
   
   for (int i = hitboxes.size()-1; i > 0; i--) {
+    Box temp;
     temp = hitboxes.get(i);
     temp.update(i);
   }
   
+  draw_score_text();
+  
   if(cooldown){
+    Box temp;
     temp = hitboxes.get(0);
     temp.vibration();
     cooldown_counter --;
     if(cooldown_counter == 0) cooldown = false;
   }else{
+    Box temp;
     temp = hitboxes.get(0);
     temp.update(0);
   }
@@ -59,17 +71,10 @@ void draw() {
     }
   }
   
-  textSize(98);
-  textAlign(CENTER, CENTER);
-  fill(0, 55, 55, 55);
-  text(score, 300, 930);
-  textSize(98+combo_size);
-  fill(235);
-  text(combo, 100, 930);
-  textSize(98);
-  fill(235);
-  text(hittedboxes.size(), 500, 930);
-  if(combo_size > 0) combo_size--;
+  switch(game_manager){
+    case GameType.STANDARD:
+      break;
+  }
 }
 
 void mouseClicked(){
@@ -83,11 +88,8 @@ void mouseClicked(){
   }else if(mouseX >= width*2/3 && temp.row == 2){
     is_hit = true;
   }
-  if(is_hit){
-    hit();
-  }else{
-    miss();
-  }
+  if(is_hit) hit();
+  else miss();
 }
 
 void keyPressed(){
@@ -103,9 +105,6 @@ void keyPressed(){
   }else{
     return;
   }
-  if(is_hit){
-    hit();
-  }else{
-    miss();
-  }
+  if(is_hit) hit();
+  else miss();
 }

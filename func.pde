@@ -7,6 +7,23 @@ void draw_board(){
   rect(width*2/3, 0, width/3, height);
 }
 
+void draw_score_text(){
+  //Score
+  textSize(98);
+  textAlign(CENTER, CENTER);
+  fill(0, 55, 55, 55);
+  text(score, 300, 930);
+  //Combo
+  textSize(98+combo_size);
+  fill(235);
+  text(combo, 100, 930);
+  if(combo_size > 0) combo_size--;
+  //Animation count
+  textSize(98);
+  fill(235);
+  text(hittedboxes.size(), 500, 930);
+}
+
 void hit(){
   score++;
   combo++;
