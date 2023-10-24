@@ -45,15 +45,7 @@ void draw() {
   display_board();
   display_boxes();
   display_score_text();
-  
-  
-  for (int i = remove_boxes.size()-1; i > 0; i--) {
-    Box temp_animation = remove_boxes.get(i);
-    temp_animation.animation_update();
-    if(temp_animation.fall_out_check()){
-      remove_boxes.remove(i);
-    }
-  }
+  display_remove_animation();
   
   switch(game_manager){
     case GameType.STANDARD:
