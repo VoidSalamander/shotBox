@@ -1,4 +1,4 @@
-void draw_board(){
+void display_board(){
   fill(154);
   rect(0, 0, width/3, height);
   fill(204);
@@ -7,7 +7,7 @@ void draw_board(){
   rect(width*2/3, 0, width/3, height);
 }
 
-void draw_score_text(){
+void display_score_text(){
   //Score
   textSize(98);
   textAlign(CENTER, CENTER);
@@ -35,6 +35,20 @@ void hit(){
 
 void miss(){
   combo = 0;
-  cooldown = true;
+  game_manager = GameType.COOLDOWN;
   cooldown_counter = 60;
+}
+
+void display_boxes(){
+  Box temp;
+  for (int i = hitboxes.size()-1; i > 0; i--) {
+    temp = hitboxes.get(i);
+    temp.update(i);
+  }
+  temp = hitboxes.get(0);
+  if(game_manager == GameType.COOLDOWN){
+    temp.vibration();
+  }else{
+    temp.update(0);
+  }
 }

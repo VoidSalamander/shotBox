@@ -13,7 +13,6 @@ static abstract class GameType{
   static final int PAUSE = 3;
 }
 
-boolean cooldown = false;
 float cooldown_counter = 0;
 
 int score = 0;
@@ -41,27 +40,12 @@ void setup() {
 void draw() {
   background(204);
   //hit();
-  draw_board();
   
-  for (int i = hitboxes.size()-1; i > 0; i--) {
-    Box temp;
-    temp = hitboxes.get(i);
-    temp.update(i);
-  }
+  /*display*/
+  display_board();
+  display_boxes();
+  display_score_text();
   
-  draw_score_text();
-  
-  if(cooldown){
-    Box temp;
-    temp = hitboxes.get(0);
-    temp.vibration();
-    cooldown_counter --;
-    if(cooldown_counter == 0) cooldown = false;
-  }else{
-    Box temp;
-    temp = hitboxes.get(0);
-    temp.update(0);
-  }
   
   for (int i = hittedboxes.size()-1; i > 0; i--) {
     Throw_Out_Animation temp_animation = hittedboxes.get(i);
@@ -74,11 +58,15 @@ void draw() {
   switch(game_manager){
     case GameType.STANDARD:
       break;
+    case GameType.COOLDOWN:
+      cooldown_counter --;
+      if(cooldown_counter == 0) game_manager = GameType.STANDARD;
+      break;
   }
 }
 
 void mouseClicked(){
-  if(cooldown) return;
+  if(game_manager == GameType.COOLDOWN) return;
   boolean is_hit = false;
   Box temp = hitboxes.get(0);
   if(mouseX < width/3 && temp.row == 0){
@@ -93,7 +81,7 @@ void mouseClicked(){
 }
 
 void keyPressed(){
-  if(cooldown) return;
+  if(game_manager == GameType.COOLDOWN) return;
   boolean is_hit = false;
   Box temp = hitboxes.get(0);
   if(key == 'z' || key == 'Z'){

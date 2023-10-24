@@ -48,9 +48,3 @@ class Throw_Out_Animation{
     return false;
   }
 }
-
-class texter{
-
-
-
-}
