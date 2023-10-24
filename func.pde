@@ -21,14 +21,14 @@ void display_score_text(){
   //Animation count
   textSize(98);
   fill(235);
-  text(hittedboxes.size(), 500, 930);
+  text(remove_boxes.size(), 500, 930);
 }
 
 void hit(){
   score++;
   combo++;
   combo_size = 10;
-  hittedboxes.add(new Throw_Out_Animation(hitboxes.get(0)));
+  remove_boxes.add(hitboxes.get(0));
   hitboxes.remove(0);
   hitboxes.add(new Box(hitboxes.size(), int(random(0,3))));
 }

@@ -20,7 +20,7 @@ int combo = 0;
 int combo_size = 0;
 
 ArrayList<Box> hitboxes;
-ArrayList<Throw_Out_Animation> hittedboxes;
+ArrayList<Box> remove_boxes;
 
 int game_manager = 0;
 
@@ -29,7 +29,7 @@ void setup() {
   noStroke();
   
   hitboxes = new ArrayList<Box>();
-  hittedboxes = new ArrayList<Throw_Out_Animation>();
+  remove_boxes = new ArrayList<Box>();
   
   for(int i=0;i<8;i++){
     hitboxes.add(new Box(i, int(random(0,3))));
@@ -47,11 +47,11 @@ void draw() {
   display_score_text();
   
   
-  for (int i = hittedboxes.size()-1; i > 0; i--) {
-    Throw_Out_Animation temp_animation = hittedboxes.get(i);
-    temp_animation.update();
+  for (int i = remove_boxes.size()-1; i > 0; i--) {
+    Box temp_animation = remove_boxes.get(i);
+    temp_animation.animation_update();
     if(temp_animation.fall_out_check()){
-      hittedboxes.remove(i);
+      remove_boxes.remove(i);
     }
   }
   

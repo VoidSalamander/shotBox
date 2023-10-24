@@ -5,11 +5,15 @@ class Box{
   float size = 160;
   int row;
   
+  float gravity = 0.6;
+  PVector speed;
+  
   Box(int list_pos, int input_row){
     point.x = offset + input_row * (offset * 2 + size);
     row = input_row;
     point.y = (7 - list_pos) * (size-offset);
     box_color = color(random(0, 255), random(0, 255), random(0, 255));
+    speed = new PVector(random(-15, 15), random(-15, 0));
   }
   
   void update(int list_pos){
@@ -22,20 +26,8 @@ class Box{
     fill(box_color);
     rect(point.x+random(15), point.y+random(15), 160, 160, 13);
   }
-}
-
-class Throw_Out_Animation{
-  PVector speed;
-  PVector point;
-  color box_color;
-  float gravity = 0.6;
-  Throw_Out_Animation(Box input_box){
-    point = input_box.point;
-    box_color = input_box.box_color;
-    speed = new PVector(random(-15, 15), random(-15, 0));
-  }
   
-  void update(){
+  void animation_update(){
     point.x += speed.x;
     point.y += speed.y;
     speed.y += gravity;
