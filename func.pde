@@ -28,6 +28,13 @@ void hit(){
   score++;
   combo++;
   combo_size = 10;
+  
+  Box temp;
+  for (int i = hitboxes.size()-1; i >= 4; i--) {
+    temp = hitboxes.get(i);
+    temp.jump_row();
+  }
+  
   remove_boxes.add(hitboxes.get(0));
   hitboxes.remove(0);
   hitboxes.add(new Box(hitboxes.size(), int(random(0,3))));

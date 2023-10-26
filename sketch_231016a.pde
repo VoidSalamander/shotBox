@@ -5,7 +5,6 @@
  * @VoidSalamander
  * 16 oct 2023
 ****/
-
 static abstract class GameType{
   static final int START = 0;
   static final int STANDARD = 1;
@@ -31,16 +30,14 @@ void setup() {
   hitboxes = new ArrayList<Box>();
   remove_boxes = new ArrayList<Box>();
   
-  for(int i=0;i<8;i++){
+  for(int i=0;i<9;i++){
     hitboxes.add(new Box(i, int(random(0,3))));
   }
-
 }
 
 void draw() {
   background(204);
   //hit();
-  
   /*display*/
   display_board();
   display_boxes();

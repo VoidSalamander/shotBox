@@ -19,6 +19,7 @@ class Box{
   void update(int list_pos){
     point.y = (7 - list_pos) * (size-offset*3);
     fill(box_color);
+    point.x = offset + row * (offset * 2 + size);
     rect(point.x, point.y, 160, 160, 13);
   }
   
@@ -38,5 +39,11 @@ class Box{
   boolean fall_out_check(){
     if(point.x > width+160 || point.x < -160 || point.y > height+160) return true;
     return false;
+  }
+  
+  void jump_row(){
+    int rand_num = int(random(0, 4));
+    if(rand_num != 0) return;
+    row = int(random(0,3));
   }
 }
