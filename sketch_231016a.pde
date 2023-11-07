@@ -13,14 +13,20 @@ static abstract class GameType{
   static final int PAUSE = 3;
 }
 
+static abstract class GameSetting{
+  static final boolean IS_USE_PLUS_REMOVE_ANIMATION = false;
+}
+
 float cooldown_counter = 0;
 
 int score = 0;
 int combo = 0;
 int combo_size = 0;
+int level = 0;
 
-ArrayList<Box> hitboxes;
-ArrayList<Box> remove_boxes;
+ArrayList<Box> hitboxes = new ArrayList<Box>();
+ArrayList<Box> remove_boxes = new ArrayList<Box>();
+ArrayList<Level> game_level = new ArrayList<Level>();
 
 int game_manager = 0;
 
@@ -28,6 +34,7 @@ void setup() {
   size(600, 1000);
   noStroke();
   
+<<<<<<< Updated upstream
   hitboxes = new ArrayList<Box>();
   remove_boxes = new ArrayList<Box>();
   
@@ -35,6 +42,15 @@ void setup() {
     hitboxes.add(new Box(i, int(random(0,3))));
   }
 
+=======
+  for(int i=0;i<8;i++){
+    hitboxes.add(new Box(i, int(random(0,3))));
+  }
+  
+  for(int i=1;i<=10;i++){
+    game_level.add(new Level(i));
+  }
+>>>>>>> Stashed changes
 }
 
 void draw() {
@@ -45,7 +61,12 @@ void draw() {
   display_board();
   display_boxes();
   display_score_text();
-  display_remove_animation();
+  if(GameSetting.IS_USE_PLUS_REMOVE_ANIMATION){
+    display_remove_animation_plus();
+  }else{
+    display_remove_animation();
+  }
+  
   
   switch(game_manager){
     case GameType.STANDARD:
