@@ -11,7 +11,6 @@ class SceneMain extends Scene{
   }
   
   void update(){
-    display_board();
     if(is_enter_game){
       ScenePosition+=20;
       if(ScenePosition > height){

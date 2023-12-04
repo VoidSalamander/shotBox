@@ -7,12 +7,15 @@ class SceneGame extends Scene{
   int score = 0;
   int combo = 0;
   int combo_size = 0;
-  int level = 0;
   
   ArrayList<Box> hitboxes = new ArrayList<Box>();
   ArrayList<Box> remove_boxes = new ArrayList<Box>();
   
   int game_manager = 0;
+  //===
+  
+  
+  
   SceneGame(){
     for(int i=0;i<8;i++){
       hitboxes.add(new Box(int(random(0,3))));
@@ -20,7 +23,6 @@ class SceneGame extends Scene{
   }
   
   void update(){
-    display_board();
     display_boxes();
     display_score_text();
     display_remove_animation();

@@ -19,11 +19,11 @@ void setup() {
   size(600, 1000);
   noStroke();
   font = createFont("Cubic_11_1.013_R.ttf", 42);
-  currentScene = new SceneMain();
+  currentScene = new test();
 }
 
 void draw() {
-  background(204);
+  display_board();
   currentScene.update();
 }
 
