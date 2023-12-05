@@ -1,5 +1,5 @@
 class SceneMain extends Scene{
-  rectButton enter_game, go_to_credits;
+  rectButton enter_game, go_to_credits, go_to_tutorial, go_to_setting, exit;
   
   Scene nextScene;
   
@@ -7,7 +7,10 @@ class SceneMain extends Scene{
   boolean is_enter_game = false;
   SceneMain() {
     enter_game = new rectButton(width/2-100,100,200,100,"遊戲開始");
-    go_to_credits = new rectButton(width/2-100,400,200,100,"關於我們");
+    go_to_credits = new rectButton(width/2-100,300,200,100,"關於我們");
+    go_to_tutorial = new rectButton(width/2-100,500,200,100,"遊戲教學");
+    go_to_setting = new rectButton(width/2-100,700,200,100,"遊戲設定");
+    exit = new rectButton(width/2-100,900,200,100,"離開遊戲");
   }
   
   void update(){
@@ -17,24 +20,41 @@ class SceneMain extends Scene{
         currentScene = nextScene;
       }
       enter_game.modify_position(width/2-100, 100+ScenePosition);
-      go_to_credits.modify_position(width/2-100, 400+ScenePosition);
+      go_to_credits.modify_position(width/2-100, 300+ScenePosition);
+      go_to_tutorial.modify_position(width/2-100, 500+ScenePosition);
+      go_to_setting.modify_position(width/2-100, 700+ScenePosition);
+      exit.modify_position(width/2-100, 700+ScenePosition);
     }
     go_to_credits.update();
     enter_game.update();
+    go_to_setting.update();
+    go_to_tutorial.update();
+    exit.update();
   }
   
   void keyPress(){
-    currentScene = new SceneGame();
+    currentScene = new test();
   }
   
   void mouseClick(){
     if(enter_game.is_mouse_enter()){
       is_enter_game = true;
-      nextScene = new SceneGame();
+      nextScene = new test();
     }
     if(go_to_credits.is_mouse_enter()){
       is_enter_game = true;
       nextScene = new SceneCredits();
+    }
+    if(go_to_tutorial.is_mouse_enter()){
+      is_enter_game = true;
+      nextScene = new SceneTutorial();
+    }
+    if(go_to_setting.is_mouse_enter()){
+      is_enter_game = true;
+      nextScene = new SceneSetting();
+    }
+    if(exit.is_mouse_enter()){
+      exit();
     }
   }
 }

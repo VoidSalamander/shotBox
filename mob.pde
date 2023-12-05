@@ -43,7 +43,6 @@ abstract class mob {
         if(fall_out_check()) current_type = MobType.DELETED;
         break;
     }
-      
   }
   
   boolean state_update(){
@@ -73,13 +72,17 @@ abstract class mob {
     if(position.x > width+160 || position.x < -160 || position.y > height+160) return true;
     return false;
   }
+  
+  void vibration(){
+    fill(index_color);
+    rect(offset + map(current_frame, 0, framerate, previous.x, position.x) * (offset * 2 + size) + random(15), map(current_frame, 0, framerate, previous.y, position.y) *(size-offset*3) -size + random(15), size, size, 13);
+  }
 }
 
 class Normal_mob extends mob{
   Normal_mob(int input_x, int input_y){
     init(input_x, input_y);
   }
-  
 }
 
 class Two_life extends mob{

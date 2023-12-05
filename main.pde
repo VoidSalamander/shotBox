@@ -19,7 +19,7 @@ void setup() {
   size(600, 1000);
   noStroke();
   font = createFont("Cubic_11_1.013_R.ttf", 42);
-  currentScene = new test();
+  currentScene = new SceneMain();
 }
 
 void draw() {
