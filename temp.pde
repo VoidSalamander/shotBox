@@ -1,9 +1,16 @@
+static abstract class GameType{
+  static final int START = 0;
+  static final int STANDARD = 1;
+  static final int COOLDOWN = 2;
+  static final int PAUSE = 3;
+}
+
 class test extends Scene{
 
   ArrayList<mob> mob_list = new ArrayList<mob>();
   
   test(){
-    for(int i=0;i<8;i++){
+    for(int i=0;i<9;i++){
       mob_list.add(new Normal_mob(int(random(0,3)), i));
     }
   }
@@ -21,7 +28,6 @@ class test extends Scene{
     else if(key == 'c' || key == 'C') hit_position = 2;
     else return;
     
-    
     for (mob temp : mob_list) {
       is_hit = temp.is_hit(hit_position) || is_hit;
     }
@@ -35,7 +41,9 @@ class test extends Scene{
       if(temp.state_update()) remove_mob = temp;
     }
     mob_list.remove(remove_mob);
-    mob_list.add(new shrinker(int(random(0,3)), 0));
+    if(random(0,1) > 0.5) mob_list.add(0, new righter(int(random(0,3)), 0));
+    else mob_list.add(0, new lefter(int(random(0,3)), 0));
+    
   }
 
   void display_mob(){
@@ -43,5 +51,4 @@ class test extends Scene{
       temp.update();
     }
   }
-  
 }

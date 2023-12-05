@@ -6,8 +6,8 @@ class SceneMain extends Scene{
   int ScenePosition = 0;
   boolean is_enter_game = false;
   SceneMain() {
-    enter_game = new rectButton(100,100,200,100,"遊戲開始");
-    go_to_credits = new rectButton(100,400,200,100,"關於我們");
+    enter_game = new rectButton(width/2-100,100,200,100,"遊戲開始");
+    go_to_credits = new rectButton(width/2-100,400,200,100,"關於我們");
   }
   
   void update(){
@@ -16,8 +16,8 @@ class SceneMain extends Scene{
       if(ScenePosition > height){
         currentScene = nextScene;
       }
-      enter_game.modify_position(100, 100+ScenePosition);
-      go_to_credits.modify_position(100, 400+ScenePosition);
+      enter_game.modify_position(width/2-100, 100+ScenePosition);
+      go_to_credits.modify_position(width/2-100, 400+ScenePosition);
     }
     go_to_credits.update();
     enter_game.update();

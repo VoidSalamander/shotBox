@@ -1,5 +1,3 @@
-
-
 class SceneGame extends Scene{
   
   float cooldown_counter = 0;
@@ -13,9 +11,6 @@ class SceneGame extends Scene{
   
   int game_manager = 0;
   //===
-  
-  
-  
   SceneGame(){
     for(int i=0;i<8;i++){
       hitboxes.add(new Box(int(random(0,3))));
@@ -127,5 +122,4 @@ class SceneGame extends Scene{
       }
     }
   }
-  
 }
