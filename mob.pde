@@ -112,16 +112,36 @@ class shrinker extends mob{
     init(input_x, input_y);
   }
   
+  
   boolean state_update(){
-    if(current_type == MobType.HITTED) return true;
-    if(position.y < 8) position.y += 1;
-    size-=20;
-    offset += 10;
+    if(current_type == MobType.DELETED) return true;
+    previous.y = position.y;
+    if(position.y <= 8) position.y += 1;
+    current_frame = 0;
+    size-=16;
+    offset += 8;
     return false;
   }
+
   void update(){
     fill(index_color);
-    rect(offset + position.x * (offset * 2 + size), +(110)*(position.y) , size, size, 13);
+    
+    switch(current_type){
+      case MobType.STANDARD:
+        rect(offset + map(current_frame, 0, framerate, previous.x, position.x) * (offset * 2 + size), map(current_frame, 0, framerate, previous.y, position.y) *(110) -size, size, size, 13);
+        if(current_frame != framerate) current_frame++;
+        break;
+      case MobType.HITTED:
+        rect(position.x, position.y, size, size, 13);
+        hitted_update();
+        if(fall_out_check()) current_type = MobType.DELETED;
+        break;
+    }
+  }
+  
+  void vibration(){
+    fill(index_color);
+    rect(offset + map(current_frame, 0, framerate, previous.x, position.x) * (offset * 2 + size) + random(15), map(current_frame, 0, framerate, previous.y, position.y) *(size-offset*3) -size + random(15), size, size, 13);
   }
 }
 
