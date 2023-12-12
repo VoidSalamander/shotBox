@@ -31,7 +31,6 @@ abstract class mob {
   
   void update(){
     fill(index_color);
-    
     switch(current_type){
       case MobType.STANDARD:
         rect(offset + map(current_frame, 0, framerate, previous.x, position.x) * (offset * 2 + size), map(current_frame, 0, framerate, previous.y, position.y) *(size-offset*3) -size, size, size, 13);
@@ -87,21 +86,19 @@ class Normal_mob extends mob{
 
 class Two_life extends mob{
   int life = 1;
-  int framerate = 10;
   Two_life(int input_x, int input_y){
     init(input_x, input_y);
   }
   boolean is_hit(int input){
     if(position.y == 8 && position.x == input){
       if(life == 1){
-        life--;
-        position.x += 1;
-        if(position.x == 3) position.x = 0;
+        life = 0;
+        position.x = int(random(0,3));
       }
       else{
         current_type = MobType.HITTED;
-        return true;
       }
+      return true;
     }
     return false;
   }
@@ -111,8 +108,7 @@ class shrinker extends mob{
   shrinker(int input_x, int input_y){
     init(input_x, input_y);
   }
-  
-  
+
   boolean state_update(){
     if(current_type == MobType.DELETED) return true;
     previous.y = position.y;
@@ -141,7 +137,7 @@ class shrinker extends mob{
   
   void vibration(){
     fill(index_color);
-    rect(offset + map(current_frame, 0, framerate, previous.x, position.x) * (offset * 2 + size) + random(15), map(current_frame, 0, framerate, previous.y, position.y) *(size-offset*3) -size + random(15), size, size, 13);
+    rect(offset + map(current_frame, 0, framerate, previous.x, position.x) * (offset * 2 + size) + random(15), map(current_frame, 0, framerate, previous.y, position.y) *(110) -size + random(15), size, size, 13);
   }
 }
 

@@ -88,8 +88,7 @@ class test extends Scene{
       if(temp.state_update()) remove_mob = temp;
     }
     mob_list.remove(remove_mob);
-    if(random(0,1) > 0.5) mob_list.add(0, new righter(int(random(0,3)), 0));
-    else mob_list.add(get_random_mob(random(0,5),0));
+    mob_list.add(get_random_mob(random(0,5),0));
   }
 
   void display_mob(){
